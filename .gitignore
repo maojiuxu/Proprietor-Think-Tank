@@ -1,0 +1,152 @@
+
+# ==============================
+# Python
+# ==============================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ==============================
+# Virtual Environment
+# ==============================
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# ==============================
+# uv
+# ==============================
+# 保留 uv.lock，确保团队依赖版本一致
+# uv.lock
+
+# ==============================
+# Environment Variables / Secrets
+# ==============================
+.env
+.env.*
+!.env.example
+!.env.template
+
+*.pem
+*.key
+secrets/
+credentials/
+config/secrets.*
+
+# ==============================
+# IDE
+# ==============================
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ==============================
+# Jupyter Notebook
+# ==============================
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ==============================
+# Logs
+# ==============================
+logs/
+*.log
+log/
+
+# ==============================
+# Testing / Coverage
+# ==============================
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+test-results/
+
+# ==============================
+# Type Checking / Linting
+# ==============================
+.mypy_cache/
+.pyright/
+.ruff_cache/
+.dmypy.json
+.pyre/
+
+# ==============================
+# RAG Documents
+# ==============================
+# 原始上传文档（根据实际情况决定是否提交）
+uploads/
+uploaded_files/
+data/raw/
+data/uploads/
+
+# 临时处理文件
+data/temp/
+data/tmp/
+temp/
+tmp/
+
+# ==============================
+# Vector Database
+# ==============================
+# Chroma
+chroma_db/
+.chroma/
+
+# FAISS
+faiss_index/
+vector_store/
+
+# Milvus
+milvus_data/
+volumes/
+*.db
+
+# ==============================
+# Model Cache
+# ==============================
+models/
+model_cache/
+.cache/
+huggingface_cache/
+
+# ==============================
+# Embedding Cache
+# ==============================
+embedding_cache/
+embeddings_cache/
+
+# ==============================
+# Runtime / PID
+# ==============================
+*.pid
+*.seed
+*.sock
+
+# ==============================
+# Docker
+# ==============================
+docker-data/
+docker-volumes/
+
+# ==============================
+# Misc
+# ==============================
+*.bak
+*.tmp
+*.orig
+*.rej
