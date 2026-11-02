@@ -66,7 +66,7 @@ class MainGraph:
 
     # 实例调用这个图
     def run(self, state):
-        if not self.graph:
+        if self.graph is None:
             self.graph = self.builder.compile()
         res = self.graph.invoke(state)
         return res

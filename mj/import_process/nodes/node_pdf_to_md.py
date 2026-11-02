@@ -9,7 +9,13 @@ class NodePDFToMD(NodeBase):
     name = "node_pdf_to_md"
 
     def process(self, state: ImportGraphState ):
-        # 此处处理入口节点的业务逻辑
+        """
+        此处处理文档转换业务逻辑
+        :param state:
+        :return:
+        """
+        pdf_path = state.get("pdf_path") # 上传的pdf文件路径，用来给mineru
+        local_path = state.get("local_path") # mineru服务器转换文档后返回的文件下载到本地的路径
 
         return state
 
