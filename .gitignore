@@ -150,3 +150,5 @@ docker-volumes/
 *.tmp
 *.orig
 *.rej
+
+/mj/test/
