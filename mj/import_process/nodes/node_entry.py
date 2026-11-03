@@ -32,11 +32,11 @@ class NodeEntry(NodeBase):
             raise ValueError("文件不存在！文件路径无效")
 
         # 文件存在，则直接获取文件的类型、名称、以及所在的文件夹
-        print("======================")
-        print("文件名（不带后缀）：", local_file_path_obj.stem)
-        print("文件名（带后缀）：", local_file_path_obj.name)
-        print("文件后缀：", local_file_path_obj.suffix)
-        print("======================")
+        # print("======================")
+        # print("文件名（不带后缀）：", local_file_path_obj.stem)
+        # print("文件名（带后缀）：", local_file_path_obj.name)
+        # print("文件后缀：", local_file_path_obj.suffix)
+        # print("======================")
 
         # 根据文件的后缀来更新数据
         if local_file_path_obj.suffix == ".pdf":
