@@ -1,6 +1,9 @@
 import json
+import shutil
 import time
+import zipfile
 from pathlib import Path
+from zipfile import ZipFile
 
 import requests
 
@@ -80,7 +83,6 @@ class NodePDFToMD(NodeBase):
                     logger.info(f"{urls[i]} 上传失败")
 
         # 3、根据batch_id轮询查询mineru的信息
-        # full_zip_url = ""
         total_time = 300 # 轮询获取结果的超时时间
         start_time = time.time()
         while True:
@@ -112,8 +114,8 @@ class NodePDFToMD(NodeBase):
                     raise Exception("文档解析中，请稍等...")
                 elif req_state == "done":
                     logger.info("文档解析完成！！！")
-                    full_zip_url = res.json().get("data").get("extract_result")[0].get("full_zip_url")
-                    print("解析后的文档下载地址为：", full_zip_url)
+                    url = res.json().get("data").get("extract_result")[0].get("full_zip_url")
+                    print("解析后的文档下载地址为：", url)
                     break
 
                 # print("==============")
@@ -128,16 +130,42 @@ class NodePDFToMD(NodeBase):
                     break
 
         # 4、拿到mineru的返回地址之后，将文档下载到本地
+        result = requests.get(url)
+        if result.status_code != 200:
+            logger.error("获取压缩包请求失败！")
+            raise Exception("获取压缩包请求失败！")
 
+        zip_content = result.content
+        zip_path_obj = local_dir_obj / f"{pdf_path_obj.stem}.zip"
+        with open(zip_path_obj, "wb") as f:
+            f.write(zip_content)
 
         # 5、解压下载后的文件到指定路径
+        unzip_path_obj = local_dir_obj / pdf_path_obj.stem
 
+        # 判断解压目录是否存在，存在则删除后再重新创建（保证幂等性）
+        if unzip_path_obj.exists():
+            shutil.rmtree(unzip_path_obj)
+        unzip_path_obj.mkdir(parents=True, exist_ok=True)
+
+        # 读取压缩文件的内容，并将其解压到文件夹中
+        with zipfile.ZipFile(zip_path_obj) as zip_ref:  # 打开压缩包拿到操作对象
+            zip_ref.extractall(unzip_path_obj)   # 将压缩包中的数据解压到指定文件夹中
 
         # 6、修改文件名
+        full_md_obj = unzip_path_obj / "full.md"
+        final_md_obj = full_md_obj.with_name(f"{pdf_path_obj.stem}.md")   # 在内存中改名，但是暂未落盘
+        full_md_obj.rename(final_md_obj)   # 改名最终落盘
 
+        # 读取md文档的内容，并将其更新到state
+        with open(final_md_obj, "rb") as f:
+            md_content = f.read()
 
         # 7、返回数据增量
-        return state
+        return {
+            "md_path": str(final_md_obj),
+            "md_content": md_content
+        }
 
 
 # 此处进行单元测试
