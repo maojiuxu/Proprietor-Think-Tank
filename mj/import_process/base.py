@@ -33,21 +33,21 @@ class NodeBase(ABC):
         pass
 
 #region 此处作为该节点的单元测试
-# if __name__ == '__main__':
-#     # 首先定义子类节点
-#     class TestNode(NodeBase):
-#         name = "test_node"
-#         def process(self, state):
-#             logger.info(f"调用 {self.name} 节点的process方法！")
-#
-#     # 实例化类
-#     test_node = TestNode()
-#
-#     # 随便创建状态
-#     state = {
-#         "abc": "123"
-#     }
-#
-#     # 模拟graph底层将实例化对象当作函数来执行
-#     res = test_node(state)
+if __name__ == '__main__':
+    # 首先定义子类节点
+    class TestNode(NodeBase):
+        name = "test_node"  # 此处甚至可以写None
+        def process(self, state):
+            logger.info(f"调用 {self.name} 节点的process方法！")
+
+    # 实例化类
+    test_node = TestNode()
+
+    # 随便创建状态
+    state = {
+        "abc": "123"
+    }
+
+    # 模拟graph底层将实例化对象当作函数来执行
+    res = test_node(state)
 #endregion
