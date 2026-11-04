@@ -24,7 +24,8 @@ def get_minio_client():
         bucket_name = ConfigMinio.MINIO_BUCKET_NAME
 
         # 然后创建一个bucket
-        minio_client.make_bucket(bucket_name=bucket_name)
+        if not minio_client.bucket_exists(bucket_name):
+            minio_client.make_bucket(bucket_name=bucket_name)
 
         # 更改这个bucket的权限为只读权限：从官网上的github上找示例
         # Example anonymous read-only bucket policy.
@@ -49,5 +50,5 @@ def get_minio_client():
 
     return minio_client
 
-if __name__ == '__main__':
-    minio_client = get_minio_client()
+# if __name__ == '__main__':
+#     minio_client = get_minio_client()
