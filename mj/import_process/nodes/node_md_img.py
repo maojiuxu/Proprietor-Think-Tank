@@ -140,7 +140,7 @@ class NodeMDImg(NodeBase):
                 "image_path": str(image_info.get("image_path_obj")),
             })
 
-
+        print(json.dumps(list_summary_image, ensure_ascii=False, indent=4))
 
 
 

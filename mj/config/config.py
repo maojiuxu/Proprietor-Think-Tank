@@ -14,3 +14,9 @@ class ConfigVLM:
     V_MODEL_API_KEY = os.getenv("V_MODEL_API_KEY")
     V_MODEL_TEMPERATURE = float(os.getenv("V_MODEL_TEMPERATURE"))
 
+class ConfigMinio:
+    MINIO_ENDPOINT = os.getenv("MINIO_ENDPOINT")
+    MINIO_ACCESS_KEY = os.getenv("MINIO_ACCESS_KEY")
+    MINIO_SECRET_KEY = os.getenv("MINIO_SECRET_KEY")
+    MINIO_BUCKET_NAME = os.getenv("MINIO_BUCKET_NAME")
+    MINIO_BUCKET_DIR = os.getenv("MINIO_BUCKET_DIR")
