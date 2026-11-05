@@ -53,14 +53,80 @@ class NodeMDImg(NodeBase):
             "md_content":md_content
         }
 
+    def replace_image_reference(
+            self,
+            md_content: str,
+            image_name: str,
+            image_url: str,
+            image_summary: str,
+    ):
+
+        escaped_name = re.escape(image_name)
+
+        # HTML 图片引用
+        html_pattern = (
+            rf'<img\b'
+            rf'(?=[^>]*\bsrc\s*=\s*["\'][^"\']*{escaped_name}["\'])'
+            rf'[^>]*>'
+        )
+
+        def replace_html(match):
+            tag = match.group()
+
+            # 替换 src 属性
+            tag = re.sub(
+                r'(\bsrc\s*=\s*["\'])[^"\']*(["\'])',
+                lambda m: m.group(1) + image_url + m.group(2),
+                tag,
+                count=1,
+            )
+
+            return f"{tag}\n\n> 图片总结：{image_summary}"
+
+        md_content = re.sub(
+            html_pattern,
+            replace_html,
+            md_content,
+        )
+
+        # Markdown 图片引用
+        markdown_pattern = (
+            rf'!\[([^\]]*)\]'
+            rf'\([^)]*{escaped_name}[^)]*\)'
+        )
+
+        def replace_markdown(match):
+            description = match.group(1)
+
+            image_reference = f"![{description}]({image_url})"
+
+            return (
+                f"{image_reference}\n\n"
+                f"> 图片总结：{image_summary}"
+            )
+
+        md_content = re.sub(
+            markdown_pattern,
+            replace_markdown,
+            md_content,
+        )
+
+        return md_content
+
     def get_new_md_content(self, image_with_summary_url_list: list[Any], md_content: str, md_path_obj: Path) -> str:
         for image_with_summary_url in image_with_summary_url_list:
-            # 利用正则直接替换
-            pattern = re.compile(r"!\[.*?\]\(.*?" + re.escape(image_with_summary_url.get('image_name')) + r"\)")
-            # 替换后，更新文档内容
-            md_content = pattern.sub(
-                lambda _: f"![{image_with_summary_url.get("summary")}]({image_with_summary_url.get("url")})",
-                md_content)
+            # # 利用正则直接替换
+            # pattern = re.compile(r"!\[.*?\]\(.*?" + re.escape(image_with_summary_url.get('image_name')) + r"\)")
+            # # 替换后，更新文档内容
+            # md_content = pattern.sub(
+            #     lambda _: f"![{image_with_summary_url.get("summary")}]({image_with_summary_url.get("url")})",
+            #     md_content)
+            md_content = self.replace_image_reference(
+                md_content=md_content,
+                image_name=image_with_summary_url.get('image_name'),
+                image_url=image_with_summary_url.get("url"),
+                image_summary=image_with_summary_url.get("summary")
+            )
 
         # 将更新后的文档重新写入文件并将其保存在原文档的同级目录
         with open(md_path_obj.parent / f"{md_path_obj.stem}_new.md", "w", encoding="utf-8") as f:
@@ -190,7 +256,12 @@ class NodeMDImg(NodeBase):
             if suffix not in IMAGE_EXTENSIONS:  # 如果不是图片则直接跳过
                 continue
             # 2.2、是图片，则直接根据图片的名称在md内容中进行匹配
-            pattern = re.compile(r"!\[.*?\]\(.*?" + re.escape(image_name) + r"\)")
+            # pattern = re.compile(r"!\[.*?\]\(.*?" + re.escape(image_name) + r"\)")
+            pattern = re.compile(
+                rf'<img\b(?=[^>]*\bsrc\s*=\s*["\'][^"\']*{image_name}[^"\']*["\'])[^>]*>'
+                rf'|'
+                rf'!\[[^\]]*\]\([^)]*{image_name}[^)]*\)'
+            )
             match = pattern.search(md_content)
             if not match:
                 logger.warning(f"文档中未使用该图片：{image_name}")
@@ -238,6 +309,7 @@ class NodeMDImg(NodeBase):
 if __name__ == "__main__":
     node_md_img = NodeMDImg()
     state = {
-        "md_path": r"E:\SZ_AIAgent\260817\project\1-ProprietorThinkTank\mj\test\test_files\output\hak180产品安全手册\hak180产品安全手册.md"
+        # "md_path": r"E:\SZ_AIAgent\260817\project\1-ProprietorThinkTank\mj\test\test_files\output\hak180产品安全手册\hak180产品安全手册.md"
+        "md_path": r"E:\SZ_AIAgent\260817\16-掌柜智库\day01\课件\01【掌柜智库】项目简介.md"
     }
     node_md_img(state)
