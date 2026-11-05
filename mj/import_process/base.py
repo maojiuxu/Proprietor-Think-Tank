@@ -13,9 +13,9 @@ class NodeBase(ABC):
         # 子类初始化实例时，在此处校验子类是否有name属性
         if self.name == "base_node":
             # 此时说明子类没有设置name属性，应该报错
-            logger.error(f"子类--{self.__class__.name}--未添加name属性")
+            logger.error(f"子类--{self.__class__.__name__}--未添加name属性")
             # 然后直接抛出异常
-            raise ValueError(f"子类--{self.__class__.name}--未添加name属性")
+            raise ValueError(f"子类--{self.__class__.__name__}--未添加name属性")
 
     # 所有的子类中都不会重写__call__方法，所以子类的实例被Graph当作函数调用时，都会调用这里的__call__方法
     def __call__(self, state):
@@ -36,7 +36,7 @@ class NodeBase(ABC):
 if __name__ == '__main__':
     # 首先定义子类节点
     class TestNode(NodeBase):
-        name = "test_node"  # 此处甚至可以写None
+        # name = "test_node"  # 此处甚至可以写None
         def process(self, state):
             logger.info(f"调用 {self.name} 节点的process方法！")
 
