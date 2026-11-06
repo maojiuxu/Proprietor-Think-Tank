@@ -14,6 +14,7 @@ dependencies = [
     { name = "colorlog" },
     { name = "fastapi" },
     { name = "grandalf" },
+    { name = "json-format" },
     { name = "langchain" },
     { name = "langchain-openai" },
     { name = "langchain-text-splitters" },
@@ -29,6 +30,7 @@ requires-dist = [
     { name = "colorlog", specifier = ">=6.12.0" },
     { name = "fastapi", specifier = ">=0.162.0" },
     { name = "grandalf", specifier = ">=0.8" },
+    { name = "json-format", specifier = ">=0.1" },
     { name = "langchain", specifier = ">=1.4.7" },
     { name = "langchain-openai", specifier = ">=1.7.3" },
     { name = "langchain-text-splitters", specifier = ">=1.1.3" },
@@ -597,6 +599,12 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/ce/80/f0dadedaa9a109f31e8978c7db355593916968d5956f382188a3f8c0888c/jiter-0.18.0-graalpy312-graalpy250_312_native-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:4d1d2dc4d930ebc225f488b6b3790acebb2e51b3a165a4a42cc1d05bb927f83e", size = 300192, upload-time = "2026-10-23T13:51:10.551Z" },
     { url = "https://files.pythonhosted.org/packages/93/51/e57dbc6c264ec6557a677189755fe4525d83439237418e3ae59771ac1cde/jiter-0.18.0-graalpy312-graalpy250_312_native-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ebb0c346b6c5d9c033fe9e9b6ed6a1ff6dac0288fe681c3434dde6eb9c264fa1", size = 301141, upload-time = "2026-10-23T13:51:11.882Z" },
 ]
+
+[[package]]
+name = "json-format"
+version = "0.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/f1/ca/3d178544b839a7b6ac44ba968b1b702fa16822ccc68f0284bc47f537794c/json-format-0.1.tar.gz", hash = "sha256:807d17c9a6df4c13a8d12005fad93761e90edee1456752a37a34d1a711e1b8bb", size = 1226, upload-time = "2013-05-26T20:32:02.234Z" }
 
 [[package]]
 name = "jsonpatch"
