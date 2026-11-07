@@ -152,3 +152,4 @@ docker-volumes/
 *.rej
 
 /mj/test/
+/ai_models/

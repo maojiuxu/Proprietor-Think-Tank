@@ -58,17 +58,18 @@ class NodeDocumentSplit(NodeBase):
         for idx, line_chunk in enumerate(line_chunk_list):
             line_chunk = line_chunk.strip() # 去除两端的空白
 
+            # code_pattern_res = re.compile(code_pattern).match(line_chunk)
+            code_pattern_res = re.match(code_pattern, line_chunk)
             if is_block:
                 # 在代码块中，则判断当前行是否是代码块结束的行
-                pattern_res = re.compile(code_pattern).match(line_chunk)
-                if start_flag == pattern_res:
+                if code_pattern_res and start_flag == code_pattern_res.group(1):
                     is_block = False
                     start_flag = None
                 else:
                     continue
             else:
                 # 不在代码块则 使用正则判断当前是否是章节标题
-                pattern_res = re.compile(title_pattern).match(line_chunk)
+                pattern_res = re.match(title_pattern, line_chunk)
                 if pattern_res:
                     # 是章节标题，则直接将之前的标题和段落直接放到 section_chunk_lict 中：
                     section_content = "\n".join(line_chunk_list[title_idx:idx+1])
@@ -78,6 +79,10 @@ class NodeDocumentSplit(NodeBase):
                         "file_name": file_name,
                     })
                     title_idx = idx
+                elif code_pattern_res:
+                    is_block = True
+                    start_flag = code_pattern_res.group(1)
+
         # 循环结束之后，需要手动将最后一段内容添加进去
         section_chunk_lict.append({
             "section_title": line_chunk_list[title_idx],

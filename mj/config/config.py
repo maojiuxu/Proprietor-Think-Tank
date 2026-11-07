@@ -20,3 +20,9 @@ class ConfigMinio:
     MINIO_SECRET_KEY = os.getenv("MINIO_SECRET_KEY")
     MINIO_BUCKET_NAME = os.getenv("MINIO_BUCKET_NAME")
     MINIO_BUCKET_DIR = os.getenv("MINIO_BUCKET_DIR")
+
+class BGEM3Config:
+    BGE_M3_PATH = os.getenv("BGE_M3_PATH")
+    BGE_M3 = os.getenv("BGE_M3")
+    BGE_DEVICE = os.getenv("BGE_DEVICE")
+    BGE_FP16 = os.getenv("BGE_FP16") in ("True", "TRUE", "true", "1", "on")
