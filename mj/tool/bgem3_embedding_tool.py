@@ -24,36 +24,14 @@ def get_bgem3_embedding_model():
 def get_bge3_embedding_vector(documents: List[str]):
     model = get_bgem3_embedding_model()
     res = model.encode_documents(documents)
-    rprint(res)
+
+    # 返回稀疏和稠密向量
+    return {
+        "dense": [item.tolist() for item in res.get('dense')],
+        "sparse": [dict(zip(item.indices.tolist(), item.data.tolist())) for item in res.get('sparse')]
+    }
 
 
 if __name__ == '__main__':
     init_documents = ["动手学深度学习", "迭代器、上下文管理器、asyncio"]
     get_bge3_embedding_vector(init_documents)
-
-    # b_list = [1,2,3,4]
-    # a_list = ["a","b","c","d"]
-    # rprint(dict(zip(a_list, b_list)))
-    # def fuc():
-    #     print("aaa")
-    #     yield 1
-    #     print("bbb")
-    #     yield 2
-    #     print("ccc")
-    #     yield 3
-    #     print("ddd")
-    #     yield 4
-    #     print("eee")
-    #     yield 5
-    #     print("fff")
-    #     return 100
-    #     yield 6
-    #
-    # res = fuc()
-    # print(next(res))
-    # print(next(res))
-    # print(next(res))
-    # print(next(res))
-    # print(next(res))
-    # print(next(res))
-    # print(next(res))
