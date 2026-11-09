@@ -10,9 +10,10 @@ class ConfigMineru:
 
 class ConfigVLM:
     V_MODEL_NAME = os.getenv("V_MODEL_NAME")
-    V_MODEL_BASE_URL = os.getenv("V_MODEL_BASE_URL")
-    V_MODEL_API_KEY = os.getenv("V_MODEL_API_KEY")
-    V_MODEL_TEMPERATURE = float(os.getenv("V_MODEL_TEMPERATURE"))
+    V_MODEL_BASE_URL = os.getenv("MODEL_DEFAULT_BASE_URL")
+    V_MODEL_API_KEY = os.getenv("MODEL_DEFAULT_API_KEY")
+    V_MODEL_TEMPERATURE = float(os.getenv("MODEL_DEFAULT_TEMPERATURE"))
+    MODEL_DEFAULT_NAME = os.getenv("MODEL_DEFAULT_NAME")
 
 class ConfigMinio:
     MINIO_ENDPOINT = os.getenv("MINIO_ENDPOINT")
@@ -26,3 +27,7 @@ class BGEM3Config:
     BGE_M3 = os.getenv("BGE_M3")
     BGE_DEVICE = os.getenv("BGE_DEVICE")
     BGE_FP16 = os.getenv("BGE_FP16") in ("True", "TRUE", "true", "1", "on")
+
+class ConfigMilvus:
+    MILVUS_URL = os.getenv("MILVUS_URL")
+    MILVUS_NAME = os.getenv("MILVUS_NAME")

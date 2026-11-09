@@ -130,7 +130,10 @@ class NodeDocumentSplit(NodeBase):
         with open(r"E:\SZ_AIAgent\260817\project\1-ProprietorThinkTank\mj\test\test_files\output\json\document_split_json.json", "w", encoding="utf-8") as f:
             f.write(json_format(final_chunk_list))
 
-        return state
+        return {
+            "chunks": final_chunk_list,
+            "file_title": file_name,
+        }
 
 
 # 此处进行单元测试
