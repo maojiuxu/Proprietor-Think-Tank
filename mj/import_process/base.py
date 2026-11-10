@@ -18,18 +18,19 @@ class NodeBase(ABC):
             raise ValueError(f"子类--{self.__class__.__name__}--未添加name属性")
 
     # 所有的子类中都不会重写__call__方法，所以子类的实例被Graph当作函数调用时，都会调用这里的__call__方法
-    def __call__(self, state):
+    def __call__(self, state: ImportGraphState):
         # 在此处我们可以对所有子类的异常进行处理，同时可以打印日志信息
         try:
             logger.info(f"{self.name}开始调用__call__方法处理业务...")
-            self.process(state)
+            res = self.process(state)
             logger.info(f"{self.name}节点的业务处理完毕！！！")
+            return res
         except Exception as e:
             logger.error(f"{self.name} 节点报错？？？出问题了--")
             raise ValueError(f"{self.name} 节点报错？？？出问题了--")
 
     @abstractmethod
-    def process(self, state: ImportGraphState):
+    def process(self, state):
         pass
 
 #region 此处作为该节点的单元测试

@@ -140,8 +140,8 @@ class NodeItemNameRecognition(NodeBase):
         #         "item_name": item_name
         #     }
         chunks = [ {**chunk, "item_name": item_name} for chunk in chunks ]
-        with open(r"E:\SZ_AIAgent\260817\project\1-ProprietorThinkTank\mj\test\test_files\output\json\item_name_chunks.json", "w", encoding="utf-8") as f:
-            f.write(json_format(chunks))
+        # with open(r"E:\SZ_AIAgent\260817\project\1-ProprietorThinkTank\mj\test\test_files\output\json\item_name_chunks.json", "w", encoding="utf-8") as f:
+        #     f.write(json_format(chunks))
 
         return {
             "chunks": chunks,

@@ -2,7 +2,8 @@
 import os
 
 from dotenv import load_dotenv
-load_dotenv()
+env_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.env"))
+load_dotenv(dotenv_path=env_path, override=True)
 
 
 class ConfigMineru:
@@ -31,3 +32,4 @@ class BGEM3Config:
 class ConfigMilvus:
     MILVUS_URL = os.getenv("MILVUS_URL")
     MILVUS_NAME = os.getenv("MILVUS_NAME")
+    MILVUS_CHUNKS_COLLECTION_NAME = os.getenv("MILVUS_CHUNKS_COLLECTION_NAME")

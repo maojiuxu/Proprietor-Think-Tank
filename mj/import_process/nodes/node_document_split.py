@@ -127,8 +127,8 @@ class NodeDocumentSplit(NodeBase):
                         "part": idx
                     })
 
-        with open(r"E:\SZ_AIAgent\260817\project\1-ProprietorThinkTank\mj\test\test_files\output\json\document_split_json.json", "w", encoding="utf-8") as f:
-            f.write(json_format(final_chunk_list))
+        # with open(r"E:\SZ_AIAgent\260817\project\1-ProprietorThinkTank\mj\test\test_files\output\json\document_split_json.json", "w", encoding="utf-8") as f:
+        #     f.write(json_format(final_chunk_list))
 
         return {
             "chunks": final_chunk_list,

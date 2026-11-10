@@ -59,11 +59,11 @@ class NodeEntry(NodeBase):
 
 
 # 此处进行单元测试
-if __name__ == "__main__":
-    node_entry = NodeEntry()
-    state = {
-        "local_file_path": r"E:\SZ_AIAgent\260817\project\1-ProprietorThinkTank\mj\test\test_files\hak180产品安全手册.pdf", # pdf文档
-        # "local_file_path": r"E:\SZ_AIAgent\260817\project\1-ProprietorThinkTank\mj\test\test_files\markdown测试文件.md", # md文档
-        # "local_file_path": r"E:\SZ_AIAgent\260817\project\1-ProprietorThinkTank\mj\test\test_files\word文档测试文件.docx", # 其他文档
-    }
-    node_entry(state)
+# if __name__ == "__main__":
+#     node_entry = NodeEntry()
+#     state = {
+#         "local_file_path": r"E:\SZ_AIAgent\260817\project\1-ProprietorThinkTank\mj\test\test_files\hak180产品安全手册.pdf", # pdf文档
+#         # "local_file_path": r"E:\SZ_AIAgent\260817\project\1-ProprietorThinkTank\mj\test\test_files\markdown测试文件.md", # md文档
+#         # "local_file_path": r"E:\SZ_AIAgent\260817\project\1-ProprietorThinkTank\mj\test\test_files\word文档测试文件.docx", # 其他文档
+#     }
+#     node_entry(state)
