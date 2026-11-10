@@ -33,3 +33,7 @@ class ConfigMilvus:
     MILVUS_URL = os.getenv("MILVUS_URL")
     MILVUS_NAME = os.getenv("MILVUS_NAME")
     MILVUS_CHUNKS_COLLECTION_NAME = os.getenv("MILVUS_CHUNKS_COLLECTION_NAME")
+
+class ConfigMongo:
+    MONGO_DB_NAME = os.getenv("MONGO_DB_NAME")
+    MONGO_URL = os.getenv("MONGO_URL")
