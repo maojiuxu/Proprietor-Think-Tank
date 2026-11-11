@@ -2,9 +2,9 @@
 
 import json
 
-from atguigu.query_process.base import NodeBase
-from atguigu.query_process.state import QueryGraphState
-from atguigu.tool.logger import logger
+from mj.query_process.base import NodeBase
+from mj.query_process.state import QueryGraphState
+from mj.tool.logger import logger
 
 class NodeItemNameConfirm(NodeBase):
     """
@@ -24,3 +24,5 @@ class NodeItemNameConfirm(NodeBase):
         logger.info(f"【{self.name}】节点逻辑")
 
         return state
+
+

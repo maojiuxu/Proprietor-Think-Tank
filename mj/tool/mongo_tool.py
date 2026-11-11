@@ -84,14 +84,14 @@ def save_chat_message(session_id,role,text,rewritten_query=None,item_names=None,
 
 if __name__ == '__main__':
     session_id = "test_001"
-    # # save_chat_message(session_id, "user", "咨询下烫金机。")
-    # save_chat_message(session_id, "assistant", "您好。请问是哪个型号")
-    # save_chat_message(session_id, "user", "hak180")
-    # save_chat_message(session_id, "assistant", "具体有什么问题呢？")
+    save_chat_message(session_id, "user", "咨询下烫金机。")
+    save_chat_message(session_id, "assistant", "您好。请问是哪个型号")
+    save_chat_message(session_id, "user", "hak180")
+    save_chat_message(session_id, "assistant", "具体有什么问题呢？")
 
     # save_chat_message(session_id, "user", "哈哈哈哈哈",message_id=ObjectId('6af2e60864e076b65cf6da6d'))
 
-    clear_history(session_id)
+    # clear_history(session_id)
 
 
 

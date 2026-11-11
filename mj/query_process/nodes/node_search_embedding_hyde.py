@@ -1,8 +1,8 @@
 # atguigu/query_process/nodes/node_search_embedding_hyde.py
 
-from atguigu.query_process.base import NodeBase
-from atguigu.query_process.state import QueryGraphState
-from atguigu.tool.logger import logger
+from mj.query_process.base import NodeBase
+from mj.query_process.state import QueryGraphState
+from mj.tool.logger import logger
 
 class NodeSearchEmbeddingHyde(NodeBase):
     """
