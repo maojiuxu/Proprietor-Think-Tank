@@ -15,6 +15,7 @@ class ConfigVLM:
     V_MODEL_API_KEY = os.getenv("MODEL_DEFAULT_API_KEY")
     V_MODEL_TEMPERATURE = float(os.getenv("MODEL_DEFAULT_TEMPERATURE"))
     MODEL_DEFAULT_NAME = os.getenv("MODEL_DEFAULT_NAME")
+    MODEL_NAME_37_PLUS = os.getenv("MODEL_NAME_37_PLUS")
 
 class ConfigMinio:
     MINIO_ENDPOINT = os.getenv("MINIO_ENDPOINT")

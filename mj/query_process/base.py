@@ -7,8 +7,8 @@
 """
 from abc import abstractmethod, ABC
 
-from atguigu.query_process.state import QueryGraphState
-from atguigu.tool.logger import logger
+from mj.query_process.state import QueryGraphState
+from mj.tool.logger import logger
 
 
 class NodeBase(ABC):

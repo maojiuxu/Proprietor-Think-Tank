@@ -81,6 +81,14 @@ def save_chat_message(session_id,role,text,rewritten_query=None,item_names=None,
             }
         })
 
+def update_history_item_names(ids,item_names,rewritten_query):
+    mongo_tool = get_mongo_tool()
+    mongo_tool.update_many({"_id": {"$in":ids}},{
+        "$set":{
+            "item_names": item_names,
+            "rewritten_query": rewritten_query,
+        }
+    })
 
 if __name__ == '__main__':
     session_id = "test_001"

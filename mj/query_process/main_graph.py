@@ -1,16 +1,16 @@
 from langgraph.constants import END
 from langgraph.graph import StateGraph
 
-from atguigu.query_process.nodes.node_answer_output import NodeAnswerOutput
-from atguigu.query_process.nodes.node_item_name_confirm import NodeItemNameConfirm
-from atguigu.query_process.nodes.node_rerank import NodeRerank
-from atguigu.query_process.nodes.node_rrf import NodeRrf
-from atguigu.query_process.nodes.node_search_embedding import NodeSearchEmbedding
-from atguigu.query_process.nodes.node_search_embedding_hyde import NodeSearchEmbeddingHyde
-from atguigu.query_process.nodes.node_web_search_mcp import NodeWebSearchMcp
-from atguigu.query_process.state import QueryGraphState
-from atguigu.tool.json_format_tool import json_format
-from atguigu.tool.logger import logger
+from mj.query_process.nodes.node_answer_output import NodeAnswerOutput
+from mj.query_process.nodes.node_item_name_confirm import NodeItemNameConfirm
+from mj.query_process.nodes.node_rerank import NodeRerank
+from mj.query_process.nodes.node_rrf import NodeRrf
+from mj.query_process.nodes.node_search_embedding import NodeSearchEmbedding
+from mj.query_process.nodes.node_search_embedding_hyde import NodeSearchEmbeddingHyde
+from mj.query_process.nodes.node_web_search_mcp import NodeWebSearchMcp
+from mj.query_process.state import QueryGraphState
+from mj.tool.json_format_tool import json_format
+from mj.tool.logger import logger
 
 
 class QueryMainGraphRunner:
