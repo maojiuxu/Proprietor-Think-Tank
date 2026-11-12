@@ -55,9 +55,9 @@ class NodeItemNameConfirm(NodeBase):
         res = llm.invoke(input=prompt)
         # rprint(history_message_list)
         # rprint(history_str)
-        print("--------------------------------------------")
-        rprint(f"原始问题：{original_query}")
-        rprint(res.content)
+        # print("--------------------------------------------")
+        # rprint(f"原始问题：{original_query}")
+        # rprint(res.content)
 
         # 对大模型返回的JSON串进行处理并转为字典格式，最后通过字典的.get()方法去拿到大模型识别到的item_names
         dict_content = json.loads(res.content.replace("```json", "").replace("```", ""))
@@ -90,8 +90,8 @@ class NodeItemNameConfirm(NodeBase):
                         "item_name": searched_item.get("entity").get("item_name"),
                         "orginal_item_name": intention_item_name
                     })
-            print("数据库中混合检索查询到的结果：================================")
-            rprint(search_results)
+            # print("数据库中混合检索查询到的结果：================================")
+            # rprint(search_results)
             # 现在已经拿到结果了，需要把结果对齐
             answer = ""
             final_item_names = []
