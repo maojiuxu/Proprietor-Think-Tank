@@ -23,6 +23,7 @@ dependencies = [
     "modelscope>=1.40.2",
     "pymilvus[model]>=3.0.2",
     "rich>=15.0.0",
+    "openai-agents>=0.24.0",
 ]
 
 [tool.uv.sources]

@@ -38,3 +38,7 @@ class ConfigMilvus:
 class ConfigMongo:
     MONGO_DB_NAME = os.getenv("MONGO_DB_NAME")
     MONGO_URL = os.getenv("MONGO_URL")
+
+class ConfigMCP:
+    MCP_DASHSCOPE_BASE_URL = os.getenv("MCP_DASHSCOPE_BASE_URL")
+    API_KEY = os.getenv("MODEL_DEFAULT_API_KEY")

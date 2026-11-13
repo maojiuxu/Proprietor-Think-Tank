@@ -140,7 +140,7 @@ class NodeDocumentSplit(NodeBase):
 if __name__ == "__main__":
     node_document_split = NodeDocumentSplit()
     init_state = {
-        "file_title": "hak180产品安全手册_new",
-        "md_path": r"E:\SZ_AIAgent\260817\project\1-ProprietorThinkTank\mj\test\test_files\output\hak180产品安全手册\hak180产品安全手册_new.md"
+        "file_title": "万用表RS-12的使用_new",
+        "md_path": r"E:\SZ_AIAgent\260817\project\1-ProprietorThinkTank\mj\test\test_files\test_graph_output\万用表RS-12的使用\万用表RS-12的使用_new.md"
     }
     node_document_split(init_state)

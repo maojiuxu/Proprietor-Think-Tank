@@ -55,9 +55,9 @@ class NodeItemNameConfirm(NodeBase):
         res = llm.invoke(input=prompt)
         # rprint(history_message_list)
         # rprint(history_str)
-        # print("--------------------------------------------")
-        # rprint(f"原始问题：{original_query}")
-        # rprint(res.content)
+        print("--------------------------------------------")
+        rprint(f"原始问题：{original_query}")
+        rprint(res.content)
 
         # 对大模型返回的JSON串进行处理并转为字典格式，最后通过字典的.get()方法去拿到大模型识别到的item_names
         dict_content = json.loads(res.content.replace("```json", "").replace("```", ""))
@@ -90,8 +90,8 @@ class NodeItemNameConfirm(NodeBase):
                         "item_name": searched_item.get("entity").get("item_name"),
                         "orginal_item_name": intention_item_name
                     })
-            # print("数据库中混合检索查询到的结果：================================")
-            # rprint(search_results)
+            print("数据库中混合检索查询到的结果：================================")
+            rprint(search_results)
             # 现在已经拿到结果了，需要把结果对齐
             answer = ""
             final_item_names = []
@@ -114,10 +114,15 @@ class NodeItemNameConfirm(NodeBase):
             if answer:
                 message_id = save_chat_message(session_id, "assistant", answer)
             # 不管有没有新记录，都要把识别到的最终确认的的final_item_names和重写的问题，回填给历史记录
-            history_list = get_recent_messages(session_id)
+            history_list = get_recent_messages(session_id, limit=1)
             ids = [item.get("_id") for item in history_list]
             if ids:
                 update_history_item_names(ids, item_names=final_item_names, rewritten_query=rewritten_query)
+
+        rprint(final_item_names)
+        print("================")
+        rprint(rewritten_query)
+
 
         return {
             "original_query": original_query,
@@ -131,7 +136,7 @@ class NodeItemNameConfirm(NodeBase):
 if __name__ == '__main__':
     node = NodeItemNameConfirm()
     init_state = {
-        "original_query": "万用表",
+        "original_query": "万用表咋用",
         "session_id": "test_001"
     }
     node(init_state)

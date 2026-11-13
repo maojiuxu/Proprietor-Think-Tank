@@ -31,8 +31,10 @@ class NodeBGEEmbedding(NodeBase):
         #         chunk["sparse_vector"] = res.get("sparse")[idx_inner]
 
         res = get_bge3_embedding_vector(
-            [f"{chunk.get('item_name')}{chunk.get('content')}" for chunk in chunks]
+            [f"{chunk.get('item_name')}{chunk.get('section_content')}" for chunk in chunks]
         )
+
+        print(json_format(res))
 
         for idx,chunk in enumerate(chunks):
             chunk["dense_vector"] = res.get("dense")[idx]
