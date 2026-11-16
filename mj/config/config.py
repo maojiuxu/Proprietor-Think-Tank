@@ -42,3 +42,7 @@ class ConfigMongo:
 class ConfigMCP:
     MCP_DASHSCOPE_BASE_URL = os.getenv("MCP_DASHSCOPE_BASE_URL")
     API_KEY = os.getenv("MODEL_DEFAULT_API_KEY")
+
+class ConfigRerank:
+    WORKSPACE_ID = os.getenv("WORKSPACE_ID")
+    RERANK_API_KEY = os.getenv("RERANK_API_KEY")
