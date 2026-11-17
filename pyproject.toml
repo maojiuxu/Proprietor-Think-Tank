@@ -25,6 +25,7 @@ dependencies = [
     "rich>=15.0.0",
     "openai-agents>=0.24.0",
     "dashscope>=2.1.0",
+    "uvicorn>=0.54.0",
 ]
 
 [tool.uv.sources]

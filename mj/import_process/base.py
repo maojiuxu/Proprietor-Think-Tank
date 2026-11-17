@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 
 from mj.import_process.state import ImportGraphState
 from mj.tool.logger import logger
+from tool.task_utils import add_running_task, add_done_task, add_node_duration
 
 
 # 所有节点的基类
@@ -21,13 +22,24 @@ class NodeBase(ABC):
     def __call__(self, state: ImportGraphState):
         # 在此处我们可以对所有子类的异常进行处理，同时可以打印日志信息
         try:
+            # 此时开始调用节点，所以可以在此处更新节点的状态
+            task_id = state.get("task_id")
+            add_running_task(task_id, self.name)
+            start_time = time.time()
+
             logger.info(f"{self.name}开始调用__call__方法处理业务...")
             res = self.process(state)
             logger.info(f"{self.name}节点的业务处理完毕！！！")
+
+            # 将此节点运行的时间添加到状态中
+            add_node_duration(task_id, self.name, time.time() - start_time)
+            # 将运行结束的节点添加到状态中去
+            add_done_task(task_id, self.name)
+
             return res
         except Exception as e:
-            logger.error(f"{self.name} 节点报错？？？出问题了--")
-            raise ValueError(f"{self.name} 节点报错？？？出问题了--")
+            logger.error(f"节点{self.name}运行有误")
+            raise e
 
     @abstractmethod
     def process(self, state):
