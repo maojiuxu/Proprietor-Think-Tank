@@ -9,6 +9,7 @@ from abc import abstractmethod, ABC
 
 from mj.query_process.state import QueryGraphState
 from mj.tool.logger import logger
+from tool.task_utils import get_q, add_running_task, put_data, add_done_task, get_task_info
 
 
 class NodeBase(ABC):
@@ -27,11 +28,17 @@ class NodeBase(ABC):
         节点执行入口
         """
         try:
+            task_id = state.get("task_id")
+            q = get_q(task_id=task_id)
+            add_running_task(task_id, self.name)
+            put_data(task_id, event="progress", data=get_task_info(task_id))
             logger.info(f"{self.name} 开始执行...")
 
             result = self.process(state)
 
             logger.info(f"{self.name} 结束执行...")
+            add_done_task(task_id, self.name)
+            put_data(task_id, event="progress", data=get_task_info(task_id))
 
             return result
         except Exception as e:

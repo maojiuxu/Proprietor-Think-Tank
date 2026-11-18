@@ -91,12 +91,8 @@ def upload( background_task: BackgroundTasks, file: UploadFile = File(..., descr
 
 
 # 定义前端获取当前文件上传任务的状态获取接口，用于前端的状态轮询
-# @app.get("/status/{task_id}")
-# def get_status(task_id: str = fastapi.Path(..., description="本次任务的id")):
-#     return get_task_info(task_id)
-
 @app.get("/status/{task_id}")
-def get_status(task_id: str = fastapi.Path(...,description="用户对应的任务id")):
+def get_status(task_id: str = fastapi.Path(..., description="本次任务的id")):
     return get_task_info(task_id)
 
 # 启动项目来测试是否能用

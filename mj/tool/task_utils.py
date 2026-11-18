@@ -150,3 +150,22 @@ def get_task_info(task_id: str) -> Dict[str, Any]:
         "done_list": get_done_task_list(task_id),
         "durations": get_node_durations(task_id)
     }
+
+# 字典
+from queue import Queue
+q_dict = {}
+#专门用来获取队列
+def get_q(task_id):
+    if task_id not in q_dict:
+        q_dict[task_id] = Queue()
+    return q_dict[task_id]
+
+def put_data(task_id, event,data):
+    q = get_q(task_id)
+    q.put({"event":event, "data":data})
+
+def get_data(task_id):
+    q = get_q(task_id)
+    return q.get()
+
+
