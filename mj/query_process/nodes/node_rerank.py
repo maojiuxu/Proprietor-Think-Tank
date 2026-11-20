@@ -24,9 +24,9 @@ class NodeRerank(NodeBase):
         merged_chunks = rrf_chunks + web_search_docs
         merged_chunks = [
             {
-                "content": item.get("content"),
+                "content": item.get("content") or item.get("section_content"),
                 "title": item.get("item_name") or item.get("title"),
-                "url": item.get("url") or "",
+                "url": item.get("url", ""),
                 "source": item.get("source")
             }
             for item in merged_chunks
@@ -34,6 +34,18 @@ class NodeRerank(NodeBase):
 
         # 将合并后的数据使用rerank模型评分
         merged_chunks_str = [item.get("content") for item in merged_chunks]
+
+        logger.info("merged_chunks_str============================================")
+        logger.info(merged_chunks_str)
+        logger.info("rrf_chunks============================================")
+        logger.info(rrf_chunks)
+        logger.info("web_search_docs============================================")
+        logger.info(web_search_docs)
+        logger.info("============================================")
+        logger.info("============================================")
+        logger.info("============================================")
+        logger.info("============================================")
+
         res = text_rerank(query=rewritten_query, documents=merged_chunks_str)
 
         for item in res:
@@ -58,7 +70,7 @@ class NodeRerank(NodeBase):
 
         break_idx = use_max_topk
 
-        for i in range(0, len(rerank_chunks)):
+        for i in range(0, len(rerank_chunks)-1):
             current_score = rerank_chunks[i].get("score")
             next_score = rerank_chunks[i + 1].get("score")
 
