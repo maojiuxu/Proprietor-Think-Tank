@@ -1,3 +1,4 @@
+import json
 import time
 import uuid
 from asyncio import Queue
@@ -126,8 +127,8 @@ def generate_sse(task_id):
     while True:
         # 获取数据并推送
         data = get_data(task_id)
-        yield f"event: {data.get('event')}\n"
-        yield f"data: {data.get('data')}\n\n"
+        payload = json.dumps(data.get("data"), ensure_ascii=False)
+        yield f"event: {data.get('event')}\ndata: {payload}\n\n"
 
 @app.get("/stream/{task_id}")
 def get_stream(task_id: str = Path(..., description="任务ID")):

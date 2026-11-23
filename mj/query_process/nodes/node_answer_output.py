@@ -103,6 +103,7 @@ class NodeAnswerOutput(NodeBase):
                 )
         return {
             "message_id": message_id,
+            "answer": answer
         }
 
 

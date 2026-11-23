@@ -810,7 +810,8 @@
                         // 防止后端未发送 final 导致按钮一直禁用
                         sendBtn.disabled = false;
                     }
-                } catch (_) {
+                } catch (error) {
+                    console.error('SSE progress 数据解析或渲染失败:', error, e.data);
                 }
             });
 
@@ -824,7 +825,8 @@
                         renderAnswerWithImages(answerEl, rawAnswerText, []);
                         scrollToBottom();
                     }
-                } catch (_) {
+                } catch (error) {
+                    console.error('SSE delta 数据解析或渲染失败:', error, e.data);
                 }
             });
 
@@ -862,7 +864,8 @@
                     // 优先使用 final 包里的完整 answer，否则回退到流式拼接的文本
                     const finalText = (d && typeof d.answer === 'string' && d.answer.trim().length > 0) ? d.answer : (rawAnswerText || answerEl.textContent || '');
                     renderAnswerWithImages(answerEl, finalText, d.image_urls || []);
-                } catch (_) {
+                } catch (error) {
+                    console.error('SSE final 数据解析或渲染失败:', error, e.data);
                 }
                 es.close();
                 sendBtn.disabled = false;

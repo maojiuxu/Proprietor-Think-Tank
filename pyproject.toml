@@ -22,10 +22,11 @@ dependencies = [
     "transformers>=4.45.0,<5.0.0",
     "modelscope>=1.40.2",
     "pymilvus[model]>=3.0.2",
-    "rich>=15.0.0",
+    "rich>=14,<15",
     "openai-agents>=0.24.0",
     "dashscope>=2.1.0",
     "uvicorn>=0.54.0",
+    "ragas==0.4.4",
 ]
 
 [tool.uv.sources]
